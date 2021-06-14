@@ -100,16 +100,14 @@ function subuh(){
     
         const subuh = document.querySelectorAll('.subuh p')[0]
         subuh.innerHTML = jam + ':' + menit + ':' + detik
-        if(selisih < 0){
+        if(selisih <= 1){
             clearInterval;
             subuh.innerHTML = '0:0:0'
-            return;
+            return
         }
     
     }, 1000)
 }
-
-
 // jadwal solat dzuhur
 function dzuhur(){
     const thn = new Date().getFullYear().toString()
@@ -249,7 +247,7 @@ setInterval(function(){
     if((penandaJam === 18 && penadaMenit >= 30) || (penandaJam > 18 && penandaJam <= 23) || (penandaJam < 4 || penandaJam === 4 && penadaMenit <= 9)){
         subuh();
     }else if((penandaJam === 4 && penadaMenit > 9 ) || (penandaJam > 4 && penandaJam < 11) || (penandaJam === 11 && penadaMenit <= 24)){
-        dzuhur()
+        dzuhur();
     }else if((penandaJam === 11 && penadaMenit > 24) || (penandaJam > 11 && penandaJam < 14) || (penandaJam === 14 && penadaMenit <= 43)){
         asar()
     }else if((penandaJam === 14 && penadaMenit > 43) || (penandaJam > 14 && penandaJam < 17) || (penandaJam === 17 && penadaMenit <= 14)){
