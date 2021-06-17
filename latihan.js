@@ -87,7 +87,7 @@ function subuh(){
     }
     let b = bln.toString()
     let tanggal = new Date().getDate() 
-    const waktuSubuh = new Date(thn + ', '+ b + ', '+ tanggal + ', 04:09:00').getTime()
+    const waktuSubuh = new Date(thn + ', '+ b + ', '+ tanggal + ', 23:09:00').getTime() + (21600 * 1000)
 
 
     setInterval(function(){
