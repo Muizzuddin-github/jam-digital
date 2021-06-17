@@ -150,6 +150,9 @@ body{
 /* responsive mobile*/
 
 @media screen and ( max-width: 576px){
+	body , .container{
+		height: 91vh;
+	}
 	.content{
 		margin-top: -40px;
 	}
