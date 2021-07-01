@@ -53,7 +53,7 @@ function tanggal(){
 
     const date = document.querySelector('.tanggal p');
     date.innerHTML = hari + ' ' + sekarang.tanggal + ' ' + bulan + ' ' + sekarang.tahun
-}
+};
 
 // jam
 setInterval(function(){
@@ -72,190 +72,66 @@ setInterval(function(){
         pwaktu.innerHTML = sekarng[0] +':'+ sekarng[1] +':'+ sekarng[2]
     }
     tanggal()
-},1000)
+},1000);
 
 
 
 // jadwal waktu solat subuh
-function subuh(){
-    const thn = new Date().getFullYear().toString()
+function waktuSolat(jam, menit, solat){
+    const thn = new Date().getFullYear()
     let bln = new Date().getMonth()
     if(bln === 11){
         bln = 0 
     }else{
         bln += 1
     }
-    let b = bln.toString()
+
     let tanggal = new Date().getDate() 
-    const waktuSubuh = new Date(thn + ', '+ b + ', '+ tanggal + ', 23:09:00').getTime() + (21600 * 1000)
+    let waktu = new Date(`${thn}, ${bln}, ${tanggal}, ${jam}:${menit}:00`).getTime();
 
-
+    if(solat === 'subuh'){
+        waktu += 21600 * 1000
+    }
     setInterval(function(){
         const sekarang = new Date().getTime();
-        const selisih = waktuSubuh - sekarang;
+        const selisih = waktu - sekarang;
     
         const jam = Math.floor(selisih % (60 * 60 * 24 * 1000) / (60 * 60 * 1000))
         const menit = Math.floor(selisih % (60 * 60  * 1000) / (60 * 1000))
         const detik = Math.floor(selisih % (60 * 1000) / 1000)
     
-        const subuh = document.querySelectorAll('.subuh p')[0]
-        subuh.innerHTML = jam + ':' + menit + ':' + detik
+        const jadwal = document.querySelector(`.${solat} p`)
+        jadwal.innerHTML = `${jam}:${menit}:${detik}`
         if(selisih <= 1){
             clearInterval;
-            subuh.innerHTML = '0:0:0'
+            jadwal.innerHTML = '0:0:0'
             return
         }
     
-    }, 1000)
-}
-// jadwal solat dzuhur
-function dzuhur(){
-    const thn = new Date().getFullYear().toString()
-    let bln = new Date().getMonth()
-    if(bln === 11){
-        bln = 0 
-    }else{
-        bln += 1
-    }
-    let b = bln.toString()
-    let tanggal = new Date().getDate() 
-    const waktuDzuhur = new Date(thn + ', '+ b + ', '+ tanggal + ', 11:24:00').getTime()
+    }, 1000);
+};
 
-
-    setInterval(function(){
-        const sekarang = new Date().getTime();
-        const selisih = waktuDzuhur - sekarang;
-    
-        const jam = Math.floor(selisih % (60 * 60 * 24 * 1000) / (60 * 60 * 1000))
-        const menit = Math.floor(selisih % (60 * 60  * 1000) / (60 * 1000))
-        const detik = Math.floor(selisih % (60 * 1000) / 1000)
-    
-        const dzuhur = document.querySelectorAll('.dzuhur p')[0]
-        dzuhur.innerHTML = jam + ':' + menit + ':' + detik
-        if(selisih <= 1){
-            clearInterval;
-            dzuhur.innerHTML = '0:0:0'
-            return
-        }
-    
-    }, 1000)
-}
-
-// jadwal waktu solat asar
-function asar(){
-    const thn = new Date().getFullYear().toString()
-    let bln = new Date().getMonth()
-    if(bln === 11){
-        bln = 0 
-    }else{
-        bln += 1
-    }
-    let b = bln.toString()
-    let tanggal = new Date().getDate() 
-    const waktuAsar = new Date(thn + ', '+ b + ', '+ tanggal + ', 14:43:00').getTime()
-
-
-    setInterval(function(){
-        const sekarang = new Date().getTime();
-        const selisih = waktuAsar - sekarang;
-    
-        const jam = Math.floor(selisih % (60 * 60 * 24 * 1000) / (60 * 60 * 1000))
-        const menit = Math.floor(selisih % (60 * 60  * 1000) / (60 * 1000))
-        const detik = Math.floor(selisih % (60 * 1000) / 1000)
-    
-        const asar = document.querySelectorAll('.asar p')[0]
-        asar.innerHTML = jam + ':' + menit + ':' + detik
-        if(selisih < 0){
-            clearInterval;
-            asar.innerHTML = '0:0:0'
-            return;
-        }
-    
-    }, 1000)
-}
-
-//jadwal waktu solat magrib
-function magrib(){
-    const thn = new Date().getFullYear().toString()
-    let bln = new Date().getMonth()
-    if(bln === 11){
-        bln = 0 
-    }else{
-        bln += 1
-    }
-    let b = bln.toString()
-    let tanggal = new Date().getDate() 
-    const waktuMagrib = new Date(thn + ', '+ b + ', '+ tanggal + ', 17:14:00').getTime()
-
-
-    setInterval(function(){
-        const sekarang = new Date().getTime();
-        const selisih = waktuMagrib - sekarang;
-    
-        const jam = Math.floor(selisih % (60 * 60 * 24 * 1000) / (60 * 60 * 1000))
-        const menit = Math.floor(selisih % (60 * 60  * 1000) / (60 * 1000))
-        const detik = Math.floor(selisih % (60 * 1000) / 1000)
-    
-        const magrib = document.querySelectorAll('.magrib p')[0]
-        magrib.innerHTML = jam + ':' + menit + ':' + detik
-        if(selisih < 0){
-            clearInterval;
-            magrib.innerHTML = '0:0:0'
-            return;
-        }
-    
-    }, 1000)
-}
-
-// jadwal waktu solat isya
-function isya(){
-    const thn = new Date().getFullYear().toString()
-    let bln = new Date().getMonth()
-    if(bln === 11){
-        bln = 0 
-    }else{
-        bln += 1
-    }
-    let b = bln.toString()
-    let tanggal = new Date().getDate() 
-    const waktuIsya = new Date(thn + ', '+ b + ', '+ tanggal + ', 18:27:00').getTime()
-
-
-    setInterval(function(){
-        const sekarang = new Date().getTime();
-        const selisih = waktuIsya - sekarang;
-    
-        const jam = Math.floor(selisih % (60 * 60 * 24 * 1000) / (60 * 60 * 1000))
-        const menit = Math.floor(selisih % (60 * 60  * 1000) / (60 * 1000))
-        const detik = Math.floor(selisih % (60 * 1000) / 1000)
-
-        const isya = document.querySelectorAll('.isya p')[0]
-        isya.innerHTML = jam + ':' + menit + ':' + detik
-        if(selisih < 0){
-            clearInterval;
-            isya.innerHTML = '0:0:0'
-            return;
-        }
-    
-    }, 1000)
-}
 
 // logika penghitung waktu mundur dijalankan
 setInterval(function(){
     penandaJam = new Date().getHours();
     penadaMenit = new Date().getMinutes();
-    if((penandaJam === 18 && penadaMenit >= 30) || (penandaJam > 18 && penandaJam <= 23) || (penandaJam < 4 || penandaJam === 4 && penadaMenit <= 9)){
-        subuh();
-    }else if((penandaJam === 4 && penadaMenit > 9 ) || (penandaJam > 4 && penandaJam < 11) || (penandaJam === 11 && penadaMenit <= 24)){
-        dzuhur();
-    }else if((penandaJam === 11 && penadaMenit > 24) || (penandaJam > 11 && penandaJam < 14) || (penandaJam === 14 && penadaMenit <= 43)){
-        asar()
-    }else if((penandaJam === 14 && penadaMenit > 43) || (penandaJam > 14 && penandaJam < 17) || (penandaJam === 17 && penadaMenit <= 14)){
-        magrib()
-    }else if((penandaJam === 17 && penadaMenit > 14) || (penandaJam === 18 && penadaMenit <= 27)){
-        isya()
+    if((penandaJam === 18 && penadaMenit >= 33) || (penandaJam > 18 && penandaJam <= 23) || (penandaJam < 4 || penandaJam === 4 && penadaMenit <= 16)){
+        waktuSolat(23, 16, 'subuh')
+
+    }else if((penandaJam === 4 && penadaMenit > 16) || (penandaJam > 4 && penandaJam < 11) || (penandaJam === 11 && penadaMenit <= 30)){
+        waktuSolat(11, 30, 'dzuhur');
+
+    }else if((penandaJam === 11 && penadaMenit > 30) || (penandaJam > 11 && penandaJam < 14) || (penandaJam === 14 && penadaMenit <= 49)){
+        waktuSolat(14, 49, 'asar');
+
+    }else if((penandaJam === 14 && penadaMenit > 49) || (penandaJam > 14 && penandaJam < 17) || (penandaJam === 17 && penadaMenit <= 19)){
+        waktuSolat(17, 19, 'magrib');
+
+    }else if((penandaJam === 17 && penadaMenit > 19) || (penandaJam === 18 && penadaMenit <= 33)){
+        waktuSolat(18, 33, 'isya');
     }
-}, 1000)
+}, 1000);
 
 // ketika menu toggle diklik
 const menu = document.getElementsByClassName('menu')[0]
@@ -274,5 +150,4 @@ container.addEventListener('click', function(e){
         span[1].classList.remove('second')
         span[2].classList.remove('last')
     }
-})
-
+});
