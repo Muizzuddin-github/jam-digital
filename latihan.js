@@ -7,52 +7,11 @@ function tanggal(){
         tahun  : new Date().getFullYear()
     }
 
-    let hari = ''
-    let bulan = ''
-    if(sekarang.hari === 0){
-        hari = 'Minggu'
-    }else if(sekarang.hari === 1){
-        hari = 'Senin'
-    }else if(sekarang.hari === 2){
-        hari = 'Selasa'
-    }else if(sekarang.hari === 3){
-        hari = 'Rabu'
-    }else if(sekarang.hari === 4){
-        hari = 'Kamis'
-    }else if(sekarang.hari === 5){
-        hari = 'Jum\'at'
-    }else  if(sekarang.hari === 6){
-        hari = 'Sabtu'
-    }
-
-    if(sekarang.bulan === 0){
-        bulan = 'January'
-    }else if(sekarang.bulan === 1){
-        bulan = 'Februari'
-    }else if(sekarang.bulan === 2){
-        bulan = 'Maret'
-    }else if(sekarang.bulan === 3){
-        bulan = 'April'
-    }else if(sekarang.bulan === 4){
-        bulan = 'Mei'
-    }else if(sekarang.bulan === 5){
-        bulan = 'Juni'
-    }else if(sekarang.bulan === 6){
-        bulan = 'Juli'
-    }else if(sekarang.bulan === 7){
-        bulan = 'Agustus'
-    }else if(sekarang.bulan === 8){
-        bulan = 'September'
-    }else if(sekarang.bulan === 9){
-        bulan = 'Oktober'
-    }else if(sekarang.bulan === 10){
-        bulan = 'November'
-    }else if(sekarang.bulan === 11){
-        bulan = 'Desember'
-    }
+    let hari = ['Minggu','Senin','Selasa',"Rabu","Kamis","Jum\'at","Sabtu"]
+    let bulan = ['January','Februari','Maret','April','Mei','Juni',"Juli",'Agustus','September','Oktober','November','Desember']
 
     const date = document.querySelector('.tanggal p');
-    date.innerHTML = hari + ' ' + sekarang.tanggal + ' ' + bulan + ' ' + sekarang.tahun
+    date.innerHTML = `${hari[sekarang.hari]}  ${sekarang.tanggal}  ${bulan[sekarang.bulan]} ${sekarang.tahun}`
 };
 
 // jam
@@ -80,15 +39,16 @@ setInterval(function(){
 function waktuSolat(jam, menit, solat){
     const thn = new Date().getFullYear()
     let bln = new Date().getMonth()
-    if(bln === 11){
+    // console.log(bln)
+    if(bln === 12){
         bln = 0 
     }else{
         bln += 1
     }
 
     let tanggal = new Date().getDate() 
+    // console.log(bln,tanggal)
     let waktu = new Date(`${thn}, ${bln}, ${tanggal}, ${jam}:${menit}:00`).getTime();
-
     if(solat === 'subuh'){
         waktu += 21600 * 1000
     }
