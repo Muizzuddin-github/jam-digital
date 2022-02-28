@@ -39,7 +39,6 @@ setInterval(function(){
 function waktuSolat(jam, menit, solat){
     const thn = new Date().getFullYear()
     let bln = new Date().getMonth()
-    // console.log(bln)
     if(bln === 12){
         bln = 0 
     }else{
@@ -47,10 +46,10 @@ function waktuSolat(jam, menit, solat){
     }
 
     let tanggal = new Date().getDate() 
-    // console.log(bln,tanggal)
     let waktu = new Date(`${thn}, ${bln}, ${tanggal}, ${jam}:${menit}:00`).getTime();
     if(solat === 'subuh'){
-        waktu += 21600 * 1000
+        // waktu += 21600 * 1000 dulu
+        waktu += 18000 * 1000
     }
     setInterval(function(){
         const sekarang = new Date().getTime();
@@ -76,21 +75,72 @@ function waktuSolat(jam, menit, solat){
 setInterval(function(){
     penandaJam = new Date().getHours();
     penadaMenit = new Date().getMinutes();
-    if((penandaJam === 18 && penadaMenit >= 33) || (penandaJam > 18 && penandaJam <= 23) || (penandaJam < 4 || penandaJam === 4 && penadaMenit <= 16)){
-        waktuSolat(23, 16, 'subuh')
+    // if((penandaJam === 18 && penadaMenit > 33) || (penandaJam > 18 && penandaJam <= 23) || (penandaJam < 4 || penandaJam === 4 && penadaMenit <= 16)){
+    //     waktuSolat(23, 16, 'subuh')
 
-    }else if((penandaJam === 4 && penadaMenit > 16) || (penandaJam > 4 && penandaJam < 11) || (penandaJam === 11 && penadaMenit <= 30)){
-        waktuSolat(11, 30, 'dzuhur');
+    // }else if((penandaJam === 4 && penadaMenit > 16) || (penandaJam > 4 && penandaJam < 11) || (penandaJam === 11 && penadaMenit <= 30)){
+    //     waktuSolat(11, 30, 'dzuhur');
 
-    }else if((penandaJam === 11 && penadaMenit > 30) || (penandaJam > 11 && penandaJam < 14) || (penandaJam === 14 && penadaMenit <= 49)){
-        waktuSolat(14, 49, 'asar');
+    // }else if((penandaJam === 11 && penadaMenit > 30) || (penandaJam > 11 && penandaJam < 14) || (penandaJam === 14 && penadaMenit <= 49)){
+    //     waktuSolat(14, 49, 'asar');
 
-    }else if((penandaJam === 14 && penadaMenit > 49) || (penandaJam > 14 && penandaJam < 17) || (penandaJam === 17 && penadaMenit <= 19)){
-        waktuSolat(17, 19, 'magrib');
+    // }else if((penandaJam === 14 && penadaMenit > 49) || (penandaJam > 14 && penandaJam < 17) || (penandaJam === 17 && penadaMenit <= 19)){
+    //     waktuSolat(17, 19, 'magrib');
 
-    }else if((penandaJam === 17 && penadaMenit > 19) || (penandaJam === 18 && penadaMenit <= 33)){
-        waktuSolat(18, 33, 'isya');
+    // }else if((penandaJam === 17 && penadaMenit > 19) || (penandaJam === 18 && penadaMenit <= 33)){
+    //     waktuSolat(18, 33, 'isya');
+    // } dulu
+
+
+    // refactoring code 
+
+    if(penandaJam === 4){
+        if(penadaMenit <= 16){
+            waktuSolat(23, 16, 'subuh')
+        }else{
+            waktuSolat(11, 30, 'dzuhur');
+        }
+    }else if(penandaJam === 11){
+        if(penadaMenit > 30){
+            waktuSolat(14, 49, 'asar');
+        }else{
+            waktuSolat(11, 30, 'dzuhur');
+        }
+    }else if(penandaJam === 14){
+        if(penadaMenit > 49){
+            waktuSolat(17, 19, 'magrib');
+        }else{
+            waktuSolat(14, 49, 'asar');
+        }
+    }else if(penandaJam === 17){
+        if(penadaMenit > 19){
+            waktuSolat(18, 33, 'isya');
+        }else{
+            waktuSolat(17, 19, 'magrib');
+        }
+    }else if(penandaJam === 18){
+        if(penadaMenit > 33){
+            waktuSolat(23, 16, 'subuh')
+        }else{
+            waktuSolat(18, 33, 'isya');
+        }
+    }else{
+        if(penandaJam > 4){
+            if(penandaJam < 11){
+                waktuSolat(11, 30, 'dzuhur');
+            }else if(penandaJam < 14){
+                waktuSolat(14, 49, 'asar');
+            }else if(penandaJam < 17){
+                waktuSolat(17, 19, 'magrib');
+            }else{
+                waktuSolat(23, 16, 'subuh')
+            }
+        }
     }
+
+
+
+
 }, 1000);
 
 // ketika menu toggle diklik
